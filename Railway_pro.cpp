@@ -21,12 +21,13 @@ RailWayManagement::RailWayManagement()
 
 void RailWayManagement::signUp()
 {
-    ofstream user_data;
+    ofstream user_data,login_info;
     user_data.open("signUpInfo.txt",ios_base :: app);
+    login_info.open("loginInfo.txt",ios_base::app);
     string name,email,check_match_pass;
 
     getchar();
-    while(user_data)
+    if(user_data.is_open() and login_info.is_open())
     {
         printf("Name: ");
         getline(cin,name);
@@ -35,27 +36,39 @@ void RailWayManagement::signUp()
         getline(cin,email);
 
         printf("User name: ");
-        getline(cin,user_name);
+        cin >> user_name;
 
         printf("Password: ");
-        getline(cin,user_pass);
+        cin >> user_pass;
         printf("Re enter password: ");
-        getline(cin,check_match_pass);
-        if(user_pass.compare(check_match_pass) == 0)
+        cin >> check_match_pass;
+        if(user_pass == check_match_pass)
         {
             cout << "Congratulation! Mr." << name << " your account is created";
             printf("\nNow you can login to researve seat\n");
-            user_data << name << endl;
-            user_data << email << endl;
-            user_data << user_name << endl;
-            user_data << user_pass << endl;
+
+            user_data <<"User Name: " << name << endl;
+            user_data << "Email: "    << email << endl;
+            user_data << "User ID: "  << user_name << endl;
+            user_data << "Password: " << user_pass << endl;
+            user_data << endl;
+            login_info << user_name << " " << user_pass << endl;
+            user_data.close();
+            login_info.close();
             cin.ignore();
             main();
         }
         else
         {
+            int check_pass_correct_frequency = 0;
             printf("Password did not match\n");
             RailWayManagement obj;
+            check_pass_correct_frequency = check_pass_correct_frequency + 1;
+            if(check_pass_correct_frequency == 3)
+            {
+                check_pass_correct_frequency = 0;
+                main();
+            }
             obj.signUp();
         }
 
@@ -63,54 +76,45 @@ void RailWayManagement::signUp()
             exit(1);
     }
     user_data.close();
+    login_info.close();
 }
 
 void RailWayManagement::userLogin()
 {
-    ifstream user_data("signUpInfo.txt");
+    ifstream login_info("loginInfo.txt");
     //string *login_user_name = new string;
     //string *login_user_pass = new string;
-    string login_user_id, login_user_pass,valid_user_info;
+    string login_user_id, login_user_pass;
+    string valid_user_id, valid_user_pass;
     //bool check_id = false;
     //bool check_pass = false;
-    bool check_creddentials = false;
+    bool check_credentials = false;
+    string str;
 
     printf("User ID: ");  cin >> login_user_id;
     printf("Password: "); cin >> login_user_pass;
 
-    
-    while(getline(user_data, valid_user_info))
+
+    for(int i = login_info.beg; i <= login_info.tellg(); i++)
     {
-        if(login_user_id.compare(valid_user_info) == 0)
-            if(login_user_pass.compare(valid_user_info) == 0)
-            {
-                check_creddentials = true;
-            }
+        login_info >> valid_user_id >> valid_user_pass;
+        if(login_user_id == valid_user_id and login_user_pass == valid_user_pass)
+        {
+            //cout << "User ID: " << valid_user_id << "     Pass: " << valid_user_pass;
+            check_credentials = true;
+        }
     }
 
-    user_data.close();
-    if(check_creddentials == true)
+
+    login_info.close();
+
+    if(check_credentials == true)
         cout << "Login successful\n";
-    
-    
-    /*while(getline(user_data, valid_user_id))
+    else
     {
-        if(valid_user_id.compare(login_user_id) == 0)
-            {
-                cout << valid_user_id;
-                check_id = true;
-                //return;
-            }
+        cout << "Credentials not matched" << endl;
+        main();
     }
-    while (getline(user_data,valid_user_pass))
-    {
-        if(valid_user_pass.compare(login_user_pass) == 0)
-        {
-            cout << valid_user_pass;
-            check_pass = true;
-        }
-    }*/
-    user_data.close();
 
 }
 
@@ -131,6 +135,7 @@ int main()
     printf("2.Sign up\n");
     printf("3.Exit\n");
     cin >> option;
+
     switch (option)
     {
     case 1:
