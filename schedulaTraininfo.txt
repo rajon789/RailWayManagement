@@ -1,0 +1,10 @@
+ChitagongExpress  dhaka  sylet  3.PM  12.00PM  sun
+KalniExpress  dhaka  chi  7.30PM  12.00AM  fry
+MohongongeExpress  dhaka  mymen  9.00PM  3.45PM  wed
+KalniExpress  sylet  dhaka  4.00PM  1.30AM  sun
+BramahputraExpress  Rangpur  dha  7.10PM  12.50PM  sat
+BramahputraExpress  mun  dha  7.30AM  3.00PM  fry
+RangpurExpress  ran  sha  5.00PM  2.45AM  fry
+TunaExpress  Dhaka  Rangpur  5.00PM  12.00AM  thu
+KalniExpress  Sylet  Dhaka  12.00AM  8.00AM  sun
+BramahputraExpress  mymensingh  dhaka  6.50PM  4.50AM  sun
