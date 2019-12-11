@@ -360,7 +360,7 @@ bool checkBookedData(string train_name_p, int compartment_no_p, string date_p, s
             }
             if(train_name == train_name_p and compartment_no == compartment_no_p)
             {
-                cout << date << date_p << "b1 " << from << from_p << " " << to << to_p << endl;
+                //cout << date << date_p << "b1 " << from << from_p << " " << to << to_p << endl;
                 if(date == date_p and from == from_p and to == to_p)
                 {
                     for(int i = 0; i < taken_seats; i++)
