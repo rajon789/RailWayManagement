@@ -180,7 +180,7 @@ void RailWayManagement::showReadyTrain()
     if(read_ready_schedule.is_open())
     {
         int train_index = 0;
-        cout << "                          Schedule List\t" << endl;
+        //cout << "                          Schedule List\t" << endl;
         cout << "Train No" << "  Train Name\t\t" << "From\t" << "To\t" << "Arrival Time\t" << "Departure Time\t" << "Off Day" << endl;
         cout << endl;
         while(read_ready_schedule >> train_name >> from >> to >> arrival_time >> depature_time >> off_day)
